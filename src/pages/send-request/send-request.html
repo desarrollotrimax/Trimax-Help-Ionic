@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title *ngIf=" requestState=='inactive' "  > Enviando solicitud...</ion-title>
+    <ion-title *ngIf="solicitudEnviada && requestState=='active' " > Solicitud Enviada </ion-title>
+    <ion-title *ngIf="!solicitudEnviada && requestState=='active' " > Error de Envío </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding >
+  <!-- <pre>{{serviceRequestForm.value | json}}</pre> -->
+  <div [@requestState]="requestState">
+    <h1 text-center class="giant-3">Orden de Servicio</h1>
+
+    <div *ngIf="solicitudEnviada" text-center>
+      <ion-icon name="checkmark-circle" color="green-original" class="giant-12"></ion-icon>
+      <h2>Enviada correctamente</h2>
+      <p>
+        Será antendido lo antes posible.
+      </p>
+      <button ion-button round icon-start color="success" (click)="navCtrl.popToRoot()">
+        <ion-icon name="home"></ion-icon>
+        Regresar a Inicio
+      </button>
+    </div>
+
+    <div *ngIf="!solicitudEnviada" text-center>
+      <ion-icon name="bug" color="danger" class="giant-12"></ion-icon>
+      <h2>No enviada</h2>
+      <p>
+        Intenténtelo de nuevo más tarde. <br>
+        O puede llamarnos al centro de atención.
+      </p>
+      <button ion-button round icon-start color="succes">
+        <ion-icon name="call" href="tel:2956010"></ion-icon>
+        Llamar a atención a cliente
+      </button>
+    </div>
+
+  </div>
+</ion-content>

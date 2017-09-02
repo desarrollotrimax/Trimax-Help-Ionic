@@ -1,5 +1,8 @@
 {
   "name": "Trimax-Help",
-  "app_id": "",
-  "type": "ionic-angular"
+  "app_id": "947cf4ce",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }

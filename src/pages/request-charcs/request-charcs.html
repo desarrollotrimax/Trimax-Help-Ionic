@@ -1,0 +1,190 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Características de la solicitud</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content no-padding>
+
+  <div [ngSwitch]="tipoDeServicio">
+
+    <ion-item-divider color="light">
+      <ion-thumbnail item-start>
+        <img src="{{ serviceRequestForm.get('equipo').get('icono').value }}">
+      </ion-thumbnail>
+      <h2>Solicito {{tipoDeServicio}}</h2>
+      <p>Para mi equipo {{ serviceRequestForm.get('equipo').get('modelo').value }}</p>
+    </ion-item-divider>
+
+    <div *ngSwitchCase=" 'Toner' " >
+
+      <form [formGroup]="charcsForm" padding>
+
+        <ion-list *ngIf="aceptaColor">
+
+          <h4>Seleccionar tinta(s):</h4>
+          <ion-grid formGroupName="tintas">
+            <ion-row>
+              <ion-col>
+                <ion-item no-lines>
+                  <ion-label>Cian</ion-label>
+                  <ion-checkbox [(ngModel)]="tintas.cian" color="cian" formControlName="cian"></ion-checkbox>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item no-lines>
+                  <ion-label>Magenta</ion-label>
+                  <ion-checkbox [(ngModel)]="tintas.magenta" color="magenta" formControlName="magenta"></ion-checkbox>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item no-lines>
+                  <ion-label>Amarilla</ion-label>
+                  <ion-checkbox [(ngModel)]="tintas.amarilla" color="amarillo" formControlName="amarilla"></ion-checkbox>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                 <ion-item no-lines>
+                  <ion-label>Negra</ion-label>
+                  <ion-checkbox [(ngModel)]="tintas.negra" color="dark" formControlName="negra"></ion-checkbox>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <p ion-text color="danger" text-center *ngIf="charcsForm.controls.tintas.dirty && charcsForm.controls.tintas.invalid ">*Selecciona al menos una tinta</p>
+
+           <h4>Escribir contadores totales:</h4>
+           <ion-grid formGroupName="contadores">
+             <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label stacked>Blanco y Negro:</ion-label>
+                  <ion-input type="number" formControlName="negro" color="secondary" required></ion-input>
+                </ion-item>
+                <p ion-text color="danger" text-center *ngIf="charcsForm.controls.contadores.controls.negro.invalid && charcsForm.controls.contadores.controls.negro.dirty && charcsForm.controls.contadores.controls.negro.touched">*Contador Requerido</p>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label stacked>Color:</ion-label>
+                  <ion-input type="number" formControlName="color" color="secondary" required ></ion-input>
+                </ion-item>
+                <p ion-text color="danger" text-center *ngIf="charcsForm.controls.contadores.controls.color.invalid && charcsForm.controls.contadores.controls.color.dirty && charcsForm.controls.contadores.controls.color.touched">*Contador Requerido</p>
+              </ion-col>
+            </ion-row>
+           </ion-grid>
+        </ion-list>
+
+        <ion-list *ngIf="!aceptaColor">
+          <ion-item no-lines formGroupName="tintas">
+            <ion-label>Tinta Negra</ion-label>
+            <ion-checkbox [(ngModel)]="tintas.negra" color="dark" formControlName="negra" disabled></ion-checkbox>
+          </ion-item>
+          <h4>Escribir contador total:</h4>
+          <ion-item formGroupName="contadores">
+            <ion-input type="number" formControlName="negro" required color="secondary"></ion-input>
+          </ion-item>
+          <p ion-text color="danger" text-center *ngIf="charcsForm.controls.contadores.controls.negro.invalid && charcsForm.controls.contadores.controls.negro.dirty && charcsForm.controls.contadores.controls.negro.touched">*Contador Requerido</p>
+        </ion-list>
+
+      </form>
+    </div>
+
+    <div *ngSwitchCase=" 'Servicio Técnico' " >
+      <form [formGroup]="charcsForm">
+
+        <ion-item>
+          <ion-label stacked>Seleccione su problema:</ion-label>
+          <ion-select interface="action-sheet" cancelText="Cancelar" okText="Aceptar"
+                      formControlName="problema">
+            <ion-option>Atoramiento de Papel</ion-option>
+            <ion-option>No detecta papel</ion-option>
+            <ion-option>Código SC</ion-option>
+            <ion-option>Pieza Suelta</ion-option>
+            <ion-option>No Imprime</ion-option>
+            <ion-option>Llamar Servicio Técnico</ion-option>
+            <ion-option>Bandeja dañada</ion-option>
+            <ion-option>No reconoce tóner</ion-option>
+            <ion-option>Sustituir unidad</ion-option>
+            <ion-option>Panel no funciona</ion-option>
+            <ion-option>No prende</ion-option>
+            <ion-option>No jala papel</ion-option>i
+            <ion-option>Otro (especificar)</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item *ngIf="charcsForm.controls.problema.value == 'Otro (especificar)' ">
+          <ion-label floating>Especificar problema:</ion-label>
+          <ion-input type="text" formControlName="problemaEspecifico" required></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="charcsForm.dirty && charcsForm.touched && ( !charcsForm.controls.problema.value || ( charcsForm.controls.problema.value == 'Otro (especificar)' && !charcsForm.controls.problemaEspecifico.value ) )">
+          <h5 style="color: red">**Por favor especifique su problema</h5>
+        </ion-item>
+
+          <div *ngIf="aceptaColor">
+            <ion-item-divider no-lines class="sin-fondo">
+              <h2>Escribir contadores totales: <small> (Opcionales) </small> </h2>
+            </ion-item-divider>
+            <ion-grid formGroupName="contadores">
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label stacked>Blanco y Negro:</ion-label>
+                    <ion-input type="number" formControlName="negro" color="secondary"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-label stacked>Color:</ion-label>
+                    <ion-input type="number" formControlName="color" color="secondary"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+          <div *ngIf="!aceptaColor">
+            <h6 padding-horizontal>Escribir contador total: <small>(Opcional)</small> </h6>
+            <ion-item formGroupName="contadores">
+              <ion-input type="number" formControlName="negro" color="secondary"></ion-input>
+            </ion-item>
+          </div>
+      </form>
+    </div>
+
+    <div *ngSwitchCase=" 'Configuración' " >
+      <form [formGroup]="charcsForm">
+
+          <ion-item padding-horizontal>
+            <ion-label floating>Especificar configuración requerida:</ion-label>
+            <ion-textarea formControlName="configuracionRequerida"></ion-textarea>
+          </ion-item>
+
+          <ion-item padding-horizontal>
+            <ion-label floating>Número de Usuarios</ion-label>
+            <ion-input formControlName="numeroDeUsuarios" type="number"></ion-input>
+          </ion-item>
+          <ion-item no-lines *ngIf="charcsForm.dirty && charcsForm.touched && charcsForm.invalid">
+            <h5 style="color: red">**Los 2 campos son obligatorios</h5>
+          </ion-item>
+
+      </form>
+    </div>
+
+    <div margin-top padding-horizontal>
+      <button ion-button block outline
+        [disabled]="!charcsForm.valid"
+        [navPush]="ClientDataPage" [navParams]="serviceRequestForm"
+        icon-end>
+        Continuar
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </div>
+  </div>
+</ion-content>
+
+
+

@@ -34,12 +34,41 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
+  primary:    #a81e24,
+  lluvia:    #CF0A2C,
+  secondary:  #182863,
+  blue-trimax: #304770,
+  success:    #5cb85c,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  green:    #32db64,
+  green-original : green,
+  original_primary:    #488aff,
+  original_secondary:  #32db64,
+  internet: #016eba,
+  facebook: #3b5999,
+  twitter:#00aced,
+  instagram:  #8a3ab9,
+
+  cian: cyan,
+  magenta: magenta,
+  amarillo: yellow
 );
+
+.image-center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 180px;
+}
+.invisible{
+  display:none !important;
+}
+
+.sin-fondo{
+       background-color: white!important;
+   }
 
 
 // App iOS Variables

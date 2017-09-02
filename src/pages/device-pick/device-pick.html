@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>¿En qué equipo?</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="equipoForm.valid">
+    <ion-title text-center>{{ machine.model }}</ion-title>
+    <ion-avatar>
+      <img src="{{ machine.icon }}" class="image-center" padding-top>
+    </ion-avatar>
+  </div>
+
+  <div *ngIf="!equipoForm.valid">
+    <ion-title text-center>Escanea el QR de la maquina:</ion-title>
+    <ion-avatar>
+      <img src="assets/img/QR-Scan.png" (click)="scan()" class="image-center" padding-top>
+    </ion-avatar>
+    <ion-title padding-top text-center>O escribe manualmente tu número de serie:</ion-title>
+  </div>
+
+  <form [formGroup]="equipoForm">
+    <ion-item>
+      <ion-label stacked>Número de Serie:</ion-label>
+      <ion-input type="text" formControlName="serie" [(ngModel)]="machine.serial_number"></ion-input>
+      <ion-chip color="danger" item-end *ngIf="!equipoForm.controls.serie.valid && equipoForm.controls.serie.dirty">
+        <ion-label color="light">Aún no es valido</ion-label>
+      </ion-chip>
+    </ion-item>
+    <ion-item class="invisible">
+      <ion-input type="text" formControlName="modelo" [(ngModel)]="machine.model"></ion-input>
+    </ion-item>
+    <ion-item class="invisible">
+      <ion-input type="text" formControlName="icono" [(ngModel)]="machine.icon"></ion-input>
+    </ion-item>
+
+    <button
+      ion-button block color="primary" outline margin-top
+      [disabled]="!equipoForm.controls.serie.valid"
+      [navPush]="RequestCharcsPage" [navParams]="serviceRequestForm"
+      icon-end>
+        Continuar
+        <ion-icon name="arrow-forward"></ion-icon>
+    </button>
+  </form>
+
+</ion-content>

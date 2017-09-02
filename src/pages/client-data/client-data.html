@@ -1,0 +1,69 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>¿A quién contactamos?</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+  <ion-item-divider no-lines padding-horizontal>
+    <ion-thumbnail item-start>
+      <img src="assets/img/Contact-icon.png">
+    </ion-thumbnail>
+    
+    <h2 *ngIf="!clientDataForm.controls.nombre.value">Para darle seguimiento a tu orden,</h2>
+    <h2 *ngIf="clientDataForm.controls.nombre.value" >{{clientDataForm.controls.nombre.value}} {{clientDataForm.controls.apellido.value}}</h2>
+
+    <p *ngIf="!clientDataForm.controls.celular.value">es importante tu contacto.</p>
+    <p *ngIf="clientDataForm.controls.celular.value">{{clientDataForm.controls.celular.value}}</p>
+  </ion-item-divider>
+
+  <div *ngIf="!clientDataForm.dirty || !clientDataForm.touched || (!clientDataForm.controls.nombre.value && !clientDataForm.controls.nombre.value && !clientDataForm.controls.celular.value )" >
+    <ion-item-divider no-lines class="sin-fondo">
+      <h2>Puedes rellenar tus datos con:</h2>
+    </ion-item-divider>
+    <ion-buttons padding-horizontal>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button ion-button class="facebook" block type="">Facebook</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button class="gmail" block type="">Google</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>  
+    </ion-buttons>
+  </div>
+
+  <ion-item-divider class="sin-fondo" no-lines>
+    <h2>O escribirlos manualmente:</h2>
+  </ion-item-divider>
+  
+  <form [formGroup]="clientDataForm" padding-horizontal>
+    <ion-item>
+      <ion-label>Nombre(s):</ion-label>
+      <ion-input type="text" formControlName="nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Apellido:</ion-label>
+      <ion-input type="text" formControlName="apellido"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Celular:</ion-label>
+      <ion-input type="tel" formControlName="celular"></ion-input>
+    </ion-item>
+  </form>
+  
+  <div margin-top padding-horizontal>
+    <button 
+    ion-button block color="primary" outline
+    [disabled]="!clientDataForm.valid" 
+    [navPush]="SendRequestPage" [navParams]="serviceRequestForm"
+    icon-end>
+      Enviar orden de servicio
+      <ion-icon name="send"></ion-icon>
+    </button>
+  </div>
+
+</ion-content>
