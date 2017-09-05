@@ -20,9 +20,9 @@ export class ClientDataPage {
     //console.log(this.serviceRequestForm);
 
     this.clientDataForm = formBuilder.group({
-      nombre: ['', [Validators.minLength(3), Validators.required] ],
-      apellido: ['', [Validators.minLength(3), Validators.required] ],
-      celular: ['', [Validators.minLength(7), Validators.required] ]
+      nombre: ['Alejandro', [Validators.minLength(3), Validators.required] ],
+      apellido: ['Villalón', [Validators.minLength(3), Validators.required] ],
+      celular: ['4432795470', [Validators.minLength(7), Validators.required] ]
     });
 
     this.serviceRequestForm.addControl('solicitante', this.clientDataForm);

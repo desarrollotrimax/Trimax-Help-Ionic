@@ -49,7 +49,7 @@ export class DevicePickPage {
     this.serviceRequestForm = formBuilder.group({
       tipoDeSolicitud: this.navParams.get('solicitud')
     });
-    this.machine.serial_number = '';
+    this.machine.serial_number = 'J8346001873';
     this.equipoForm = formBuilder.group({
       serie: [this.machine.serial_number, [ Validators.required, Validators.minLength(5), Validators.maxLength(24) ]  ],
       modelo: this.machine.model,
@@ -82,7 +82,7 @@ export class DevicePickPage {
         if(result.found){
 
           let toast = this.toastCtrl.create({
-            message: 'Maquina encontrada',
+            message: 'Máquina encontrada',
             duration: 1000,
             position: 'top'
           });

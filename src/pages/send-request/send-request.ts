@@ -60,16 +60,21 @@ export class SendRequestPage {
 
       this._ServiceRequest.cccMailRequest(this.serviceRequestForm.value)
         .then(data=>{
-          let respuesta =data.json();
 
-          if( respuesta.mailSent ){
-            this.solicitudEnviada= true;
-          }else{
-            this.tipoDeError = 'Error de parte del Servidor';
-            this.erroresDeEnvio = respuesta.errors;
-          }
+          console.log(data);
 
-          this.requestState='active';
+
+          // let respuesta =data.json();
+
+          // if( respuesta.mailSent ){
+          //   this.solicitudEnviada= true;
+          // }else{
+          //   this.tipoDeError = 'Error de parte del Servidor';
+          //   this.erroresDeEnvio = respuesta.errors;
+          // }
+
+          // this.requestState='active';
+
           loading.dismiss();
 
         }).catch(error=>{

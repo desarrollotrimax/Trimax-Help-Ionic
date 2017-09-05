@@ -23,8 +23,9 @@ export class ServiceRequestProvider {
 
   cccMailRequest(data:object){
     let jsonData = JSON.stringify(data);
-    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
+
 
     // this.http.get(apiServer)
     //   .subscribe(data => {
