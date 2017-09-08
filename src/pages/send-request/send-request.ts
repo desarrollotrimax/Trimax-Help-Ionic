@@ -63,17 +63,16 @@ export class SendRequestPage {
 
           console.log(data);
 
+          let respuesta =data.json();
 
-          // let respuesta =data.json();
+          if( respuesta.mailSent ){
+            this.solicitudEnviada= true;
+          }else{
+            this.tipoDeError = 'Error de parte del Servidor';
+            this.erroresDeEnvio = respuesta.errors;
+          }
 
-          // if( respuesta.mailSent ){
-          //   this.solicitudEnviada= true;
-          // }else{
-          //   this.tipoDeError = 'Error de parte del Servidor';
-          //   this.erroresDeEnvio = respuesta.errors;
-          // }
-
-          // this.requestState='active';
+          this.requestState='active';
 
           loading.dismiss();
 

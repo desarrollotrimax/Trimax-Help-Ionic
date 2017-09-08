@@ -23,7 +23,7 @@ export class ServiceRequestProvider {
 
   cccMailRequest(data:object){
     let jsonData = JSON.stringify(data);
-    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     let options = new RequestOptions({ headers: headers });
 
 
@@ -43,7 +43,7 @@ export class ServiceRequestProvider {
     //         console.log("Oooops!");
     //     });
 
-    return this.http.post(apiServer+'service-request/mailer', jsonData, options).toPromise();
+    return this.http.post(apiServer+'api/service-request/mailer', jsonData, options).toPromise();
   }
 
 }

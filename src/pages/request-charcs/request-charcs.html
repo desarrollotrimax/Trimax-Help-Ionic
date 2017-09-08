@@ -112,7 +112,7 @@
             <ion-option>Sustituir unidad</ion-option>
             <ion-option>Panel no funciona</ion-option>
             <ion-option>No prende</ion-option>
-            <ion-option>No jala papel</ion-option>i
+            <ion-option>No jala papel</ion-option>
             <ion-option>Otro (especificar)</ion-option>
           </ion-select>
         </ion-item>
@@ -158,9 +158,22 @@
     <div *ngSwitchCase=" 'Configuración' " >
       <form [formGroup]="charcsForm">
 
-          <ion-item padding-horizontal>
-            <ion-label floating>Especificar configuración requerida:</ion-label>
-            <ion-textarea formControlName="configuracionRequerida"></ion-textarea>
+          <ion-item>
+            <ion-label stacked>Tipo de configuración:</ion-label>
+            <ion-select interface="action-sheet" cancelText="Cancelar" okText="Aceptar" formControlName="configuracionRequerida">
+              <ion-option>Escaner</ion-option>
+              <ion-option>Impresora</ion-option>
+              <ion-option>Copiadora</ion-option>
+              <ion-option>Otro (especificar)</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item *ngIf="charcsForm.controls.configuracionRequerida.value == 'Otro (especificar)' ">
+            <ion-label floating>Especificar configuración:</ion-label>
+            <ion-input type="text" formControlName="configuracionEspecifica" required></ion-input>
+          </ion-item>
+          <ion-item no-lines *ngIf="charcsForm.dirty && charcsForm.touched && ( !charcsForm.controls.configuracionRequerida.value || ( charcsForm.controls.configuracionRequerida.value == 'Otro (especificar)' && !charcsForm.controls.configuracionEspecifica.value ) )">
+            <h5 style="color: red">**Por favor especifique su configuración</h5>
           </ion-item>
 
           <ion-item padding-horizontal>

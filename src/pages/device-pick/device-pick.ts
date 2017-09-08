@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, ToastController } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
@@ -9,7 +8,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Machine } from './../../Models/machine';
 
 //Services
-import { ServiceRequestProvider } from './../../providers/index.providers';
+import { ServiceRequestProvider, StorageProvider} from './../../providers/index.providers';
 
 import { RequestCharcsPage } from './../request-charcs/request-charcs';
 
@@ -37,19 +36,20 @@ export class DevicePickPage {
 
   public machine = new Machine;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public formBuilder: FormBuilder,
-              public _ServiceRequest:ServiceRequestProvider,
+  constructor(private navCtrl: NavController,
+              private navParams: NavParams,
+              private formBuilder: FormBuilder,
+              private _ServiceRequest:ServiceRequestProvider,
               private barcodeScanner: BarcodeScanner,
-              public platform: Platform,
-              private toastCtrl: ToastController
+              private platform: Platform,
+              private toastCtrl: ToastController,
+              private _storage: StorageProvider
             ) {
 
     this.serviceRequestForm = formBuilder.group({
       tipoDeSolicitud: this.navParams.get('solicitud')
     });
-    this.machine.serial_number = 'J8346001873';
+
     this.equipoForm = formBuilder.group({
       serie: [this.machine.serial_number, [ Validators.required, Validators.minLength(5), Validators.maxLength(24) ]  ],
       modelo: this.machine.model,
@@ -57,14 +57,18 @@ export class DevicePickPage {
     });
 
     this.serviceRequestForm.addControl('equipo', this.equipoForm);
+
+    this._storage.getData("machine_serial_number").then(resp=>{
+      if(resp) this.machine.serial_number = this.sanitization( String(resp) );
+    });
+
   }
 
   ngOnInit(): void {
     this.setWaitStage();
     this.equipoForm.controls.serie.valueChanges.subscribe (term =>{
       this.setWaitStage() ;
-
-      term = term.replace(/[^A-Za-z0-9]/g, ''); //Sanitize user input to an alphanumeric string
+      term = this.sanitization(term); //Sanitize user input to an alphanumeric string
       this.userInput.next(term) ; // Push a search term into the observable stream.
     });
 
@@ -91,6 +95,8 @@ export class DevicePickPage {
           this.machine.model = result.model;
           this.machine.icon = result.icon;
           this.equipoForm.controls.serie.setErrors (null);
+
+          this._storage.setData("machine_serial_number", this.machine.serial_number);
         }
       });
   }
@@ -186,6 +192,12 @@ export class DevicePickPage {
       toast.present();
      });
 
+  }
+  /*
+    alphanumeric sanitization
+  */
+  sanitization(term:string){
+    return term.replace(/[^A-Za-z0-9]/g, '');
   }
 
 }

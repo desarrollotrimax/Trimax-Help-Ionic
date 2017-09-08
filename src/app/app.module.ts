@@ -11,7 +11,10 @@ import { MyApp } from './app.component';
 
 //Pages
 import { HomePage, DevicePickPage, RequestCharcsPage, ClientDataPage, SendRequestPage, InfoPage } from '../pages/index.pages';
-import { ListPage } from '../pages/list/list';
+
+//Services
+import { StorageProvider } from '../providers/index.providers';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -21,8 +24,7 @@ import { ListPage } from '../pages/list/list';
     RequestCharcsPage,
     ClientDataPage,
     SendRequestPage,
-    InfoPage,
-    ListPage
+    InfoPage
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { ListPage } from '../pages/list/list';
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp, {
        backButtonText: '',
-    })
+    }),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,13 +43,13 @@ import { ListPage } from '../pages/list/list';
     RequestCharcsPage,
     ClientDataPage,
     SendRequestPage,
-    InfoPage,
-    ListPage
+    InfoPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    StorageProvider
   ]
 })
 export class AppModule {}

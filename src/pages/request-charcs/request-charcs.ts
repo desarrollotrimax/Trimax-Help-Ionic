@@ -95,6 +95,7 @@ export class RequestCharcsPage {
 
     this.charcsForm = this.formBuilder.group({
       configuracionRequerida : ['', Validators.required],
+      configuracionEspecifica : '',
       numeroDeUsuarios : [null, Validators.required],
     });
 

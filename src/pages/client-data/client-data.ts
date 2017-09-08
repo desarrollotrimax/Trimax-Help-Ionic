@@ -1,7 +1,15 @@
-import { SendRequestPage } from './../send-request/send-request';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+
+// Ionic Pages
+import { SendRequestPage } from './../send-request/send-request';
+
+// Services
+import { StorageProvider } from './../../providers/storage/storage';
+
+// Models
+import { Applicant } from './../../Models/applicant';
 
 @IonicPage()
 @Component({
@@ -13,27 +21,34 @@ export class ClientDataPage {
   public serviceRequestForm :FormGroup;
   public clientDataForm:FormGroup;
   public SendRequestPage:any = SendRequestPage;
+  public solicitante = new Applicant;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public formBuilder: FormBuilder,
+    private _storage: StorageProvider
+  ){
     this.serviceRequestForm = this.navParams.data;
 
-    //console.log(this.serviceRequestForm);
-
     this.clientDataForm = formBuilder.group({
-      nombre: ['Alejandro', [Validators.minLength(3), Validators.required] ],
-      apellido: ['Villalón', [Validators.minLength(3), Validators.required] ],
-      celular: ['4432795470', [Validators.minLength(7), Validators.required] ]
+      nombre: [this.solicitante.firstName, [Validators.minLength(3), Validators.required] ],
+      apellido: [this.solicitante.lastName, [Validators.minLength(3), Validators.required] ],
+      celular: [this.solicitante.telephone, [Validators.minLength(7), Validators.required] ]
     });
 
     this.serviceRequestForm.addControl('solicitante', this.clientDataForm);
 
-    // console.log(this.serviceRequestForm);
-    // console.log(this.serviceRequestForm.value);
-    // console.log(this.serviceRequestForm.get('tipo').value);
-    // console.log(this.serviceRequestForm.get('cliente'));
+    this._storage.getData("solicitante").then(resp=>{
+      if(resp){
+        resp = JSON.parse(resp as string);
+        this.solicitante = resp as Applicant;
+      }
+    });
 
-
-
+  }
+  setData(){
+    this._storage.setData("solicitante", this.solicitante);
   }
 
 }
