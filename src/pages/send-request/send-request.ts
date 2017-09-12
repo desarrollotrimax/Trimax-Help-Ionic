@@ -61,8 +61,6 @@ export class SendRequestPage {
       this._ServiceRequest.cccMailRequest(this.serviceRequestForm.value)
         .then(data=>{
 
-          console.log(data);
-
           let respuesta =data.json();
 
           if( respuesta.mailSent ){
@@ -85,14 +83,5 @@ export class SendRequestPage {
 
         });
 
-  }
-  toggleState(){
-    if(this.requestState== 'active'){
-      this.requestState = 'inactive'
-      alert('estado actual: '+this.requestState);
-    }else{
-      this.requestState='active'
-      alert('estado actual: '+this.requestState);
-    }
   }
 }
