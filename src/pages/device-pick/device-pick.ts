@@ -81,8 +81,7 @@ export class DevicePickPage {
         ? this._ServiceRequest.machineVerification(term)
         // or the observable of empty values if there was no search term
         : []
-      )
-      .subscribe((result) => {
+      ).subscribe((result) => {
         if(result.found){
 
           let toast = this.toastCtrl.create({
@@ -98,7 +97,15 @@ export class DevicePickPage {
 
           this._storage.setData("machine_serial_number", this.machine.serial_number);
         }
-      });
+      },(error) => {
+        let toast = this.toastCtrl.create({
+          message: 'Se requiere conexión a internet',
+          duration: 3500,
+          position: 'bottom'
+        });
+        toast.present();
+        this.navCtrl.pop();
+      }, () => console.log("Completed!"));
   }
   get serie(){return this.equipoForm.get('serie');}
 
