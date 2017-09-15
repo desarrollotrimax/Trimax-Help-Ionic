@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, ToastController } from 'ionic-angular';
+import { NavController, NavParams, Platform, ToastController } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 
 //PlUG-INS
@@ -19,7 +19,6 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 
-@IonicPage()
 @Component({
   selector: 'page-device-pick',
   templateUrl: 'device-pick.html',

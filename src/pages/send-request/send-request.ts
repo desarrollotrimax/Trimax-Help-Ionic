@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormGroup } from '@angular/forms';
 
 //Services
@@ -16,7 +16,6 @@ import {
 } from '@angular/animations';
 
 
-@IonicPage()
 @Component({
   selector: 'page-send-request',
   templateUrl: 'send-request.html',

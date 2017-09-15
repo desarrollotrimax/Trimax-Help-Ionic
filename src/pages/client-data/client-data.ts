@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 // Ionic Pages
@@ -11,7 +11,6 @@ import { StorageProvider } from './../../providers/storage/storage';
 // Models
 import { Applicant } from './../../Models/applicant';
 
-@IonicPage()
 @Component({
   selector: 'page-client-data',
   templateUrl: 'client-data.html',

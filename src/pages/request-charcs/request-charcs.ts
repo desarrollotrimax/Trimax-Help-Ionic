@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup, ValidatorFn,AbstractControl } from '@angular/forms';
 
 import { ClientDataPage } from './../client-data/client-data';
 
-@IonicPage()
 @Component({
   selector: 'page-request-charcs',
   templateUrl: 'request-charcs.html',
