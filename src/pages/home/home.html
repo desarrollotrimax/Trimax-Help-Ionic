@@ -7,29 +7,30 @@
 
     <ion-title>Trimax Help!</ion-title>
 
-    <ion-buttons end [navPush]="InfoPage">
+    <ion-buttons end [navPush]="'InfoPage'">
       <button ion-button icon-only>
         <ion-icon name="information-circle"></ion-icon>
       </button>
     </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
 <ion-content class="card-background-page">
 
-  <ion-card [navPush]="DevicePickPage" [navParams]="{ 'solicitud': 'Toner' }">
+  <ion-card [navPush]="'DevicePickPage'" [navParams]="{ 'solicitud': 'Toner' }">
     <img src="assets/img/services-cards/Toner.jpg"/>
     <div class="card-subtitle">Solicitar</div>
     <div class="card-title">Tóner</div>
   </ion-card>
 
-  <ion-card [navPush]="DevicePickPage" [navParams]="{ 'solicitud': 'Servicio Técnico' }">
+  <ion-card [navPush]="'DevicePickPage'" [navParams]="{ 'solicitud': 'Servicio Técnico' }">
     <img src="assets/img/services-cards/ServTec.jpg"/>
     <div class="card-subtitle">Solicitar</div>
     <div class="card-title">Servicio Técnico</div>
   </ion-card>
 
-  <ion-card [navPush]="DevicePickPage" [navParams]="{ 'solicitud': 'Configuración' }">
+  <ion-card [navPush]="'DevicePickPage'" [navParams]="{ 'solicitud': 'Configuración' }">
     <img src="assets/img/services-cards/Config.jpg"/>
     <div class="card-subtitle">Solicitar</div>
     <div class="card-title">Configuración</div>

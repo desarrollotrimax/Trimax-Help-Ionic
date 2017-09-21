@@ -59,7 +59,7 @@
     <button
     ion-button block color="primary" outline
     [disabled]="!clientDataForm.valid"
-    [navPush]="SendRequestPage" [navParams]="serviceRequestForm"
+    [navPush]="'SendRequestPage'" [navParams]="serviceRequestForm"
     (click)="setData()"
     icon-end>
       Enviar orden de servicio

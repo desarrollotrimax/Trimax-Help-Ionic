@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
-
-// Ionic Pages
-import { SendRequestPage } from './../send-request/send-request';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 // Services
 import { StorageProvider } from './../../providers/storage/storage';
@@ -11,6 +8,7 @@ import { StorageProvider } from './../../providers/storage/storage';
 // Models
 import { Applicant } from './../../Models/applicant';
 
+@IonicPage()
 @Component({
   selector: 'page-client-data',
   templateUrl: 'client-data.html',
@@ -19,7 +17,6 @@ export class ClientDataPage {
 
   public serviceRequestForm :FormGroup;
   public clientDataForm:FormGroup;
-  public SendRequestPage:any = SendRequestPage;
   public solicitante = new Applicant;
 
   constructor(

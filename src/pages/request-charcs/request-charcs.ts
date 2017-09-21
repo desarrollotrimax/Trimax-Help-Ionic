@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import {Validators, FormBuilder, FormGroup, ValidatorFn,AbstractControl } from '@angular/forms';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup, ValidatorFn,AbstractControl } from '@angular/forms';
 
-import { ClientDataPage } from './../client-data/client-data';
-
+@IonicPage()
 @Component({
   selector: 'page-request-charcs',
   templateUrl: 'request-charcs.html',
@@ -17,8 +16,7 @@ export class RequestCharcsPage {
   public tintas:any = {'negra': false, 'cian': false, 'magenta': false,'amarilla': false};
   public contadores:any = {'negro': null, 'color': null};
 
-  public ClientDataPage:any= ClientDataPage;
-  public tipoPorFunciones:string;
+  //public tipoPorFunciones:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder) {
 
@@ -39,8 +37,8 @@ export class RequestCharcsPage {
            break;
     }
 
-
   }
+
   private construirFormToToner(){
 
     if(this.aceptaColor){

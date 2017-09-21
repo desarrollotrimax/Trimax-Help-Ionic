@@ -9,8 +9,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MyApp } from './app.component';
 
-//Pages
-import { HomePage, DevicePickPage, RequestCharcsPage, ClientDataPage, SendRequestPage, InfoPage } from '../pages/index.pages';
 
 //Services
 import { StorageProvider } from '../providers/index.providers';
@@ -19,12 +17,6 @@ import { IonicStorageModule } from '@ionic/storage';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    DevicePickPage,
-    RequestCharcsPage,
-    ClientDataPage,
-    SendRequestPage,
-    InfoPage
   ],
   imports: [
     BrowserModule,
@@ -38,12 +30,6 @@ import { IonicStorageModule } from '@ionic/storage';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    DevicePickPage,
-    RequestCharcsPage,
-    ClientDataPage,
-    SendRequestPage,
-    InfoPage
   ],
   providers: [
     StatusBar,

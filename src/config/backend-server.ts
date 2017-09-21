@@ -1,2 +1,2 @@
-export const apiServer:string = 'http://help.trimaxsd.com/';
+export const apiServer:string = 'https://help.trimaxsd.com/';
 

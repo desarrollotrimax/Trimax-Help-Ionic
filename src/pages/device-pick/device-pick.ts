@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, ToastController } from 'ionic-angular';
-import {Validators, FormBuilder, FormGroup} from '@angular/forms';
+import { IonicPage, NavController, NavParams, Platform, ToastController } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 //PlUG-INS
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
+//Models
 import { Machine } from './../../Models/machine';
 
 //Services
 import { ServiceRequestProvider, StorageProvider} from './../../providers/index.providers';
-
-import { RequestCharcsPage } from './../request-charcs/request-charcs';
 
 // Observable operators
 import { Subject } from 'rxjs/Subject';
@@ -19,6 +18,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 
+@IonicPage()
 @Component({
   selector: 'page-device-pick',
   templateUrl: 'device-pick.html',
@@ -26,7 +26,6 @@ import 'rxjs/add/operator/switchMap';
 })
 export class DevicePickPage {
 
-  public RequestCharcsPage:any = RequestCharcsPage;
   public serviceRequestForm :FormGroup;
   public equipoForm :FormGroup;
 
